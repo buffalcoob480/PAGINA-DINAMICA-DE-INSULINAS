@@ -4,29 +4,34 @@ const tocEl = document.getElementById("toc");
 fetch('insulinoterapia.txt')
   .then(res => res.text())
   .then(text => {
-    const sections = text.split(/Sección (\d+):/g).filter(Boolean);
+    const re = /Sección\s+(\d+):\s*([^\n]+)\n/gi;
+    const matches = [...text.matchAll(re)];
 
-    for (let i = 0; i < sections.length; i += 2) {
-      const num = sections[i];
-      const content = sections[i + 1];
-      const lines = content.trim().split('\n');
-      const title = lines[0].trim();
-      const body = lines.slice(1).join('\n');
-      const id = `seccion-${num}`;
+    matches.forEach((match, index) => {
+      const sectionNum = match[1];
+      const title = match[2];
+      const startIndex = match.index + match[0].length;
+      const endIndex = index + 1 < matches.length ? matches[index + 1].index : text.length;
+      const body = text.substring(startIndex, endIndex).trim();
 
+      const id = `seccion-${sectionNum}`;
+
+      // TOC
       const li = document.createElement("li");
-      li.innerHTML = `<a href="#${id}">Sección ${num}: ${title}</a>`;
+      li.innerHTML = `<a href="#${id}">Sección ${sectionNum}: ${title}</a>`;
       tocEl.appendChild(li);
 
+      // Sección expandible
       const sectionEl = document.createElement("section");
       sectionEl.id = id;
       sectionEl.innerHTML = `
-        <button class="collapsible">Sección ${num}: ${title}</button>
+        <button class="collapsible">Sección ${sectionNum}: ${title}</button>
         <div>${body.replace(/\n/g, '<br>')}</div>
       `;
       contentEl.appendChild(sectionEl);
-    }
+    });
 
+    // Toggle de colapsables
     document.querySelectorAll(".collapsible").forEach(btn => {
       btn.addEventListener("click", function () {
         const content = this.nextElementSibling;
