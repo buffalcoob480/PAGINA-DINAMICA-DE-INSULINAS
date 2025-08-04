@@ -4,31 +4,34 @@ const tocEl = document.getElementById("toc");
 fetch('insulinoterapia.txt')
   .then(res => res.text())
   .then(text => {
-    const sections = text.split(/Sección \d+:/g).filter(Boolean);
+    const sections = text.split(/Sección (\d+):/g).filter(Boolean);
 
-    sections.forEach((sec, index) => {
-      const titleMatch = sec.match(/^.*\n/);
-      const title = titleMatch ? titleMatch[0].trim() : `Sección ${index + 1}`;
-      const id = `seccion-${index + 1}`;
+    for (let i = 0; i < sections.length; i += 2) {
+      const num = sections[i];
+      const content = sections[i + 1];
+      const lines = content.trim().split('\n');
+      const title = lines[0].trim();
+      const body = lines.slice(1).join('\n');
+      const id = `seccion-${num}`;
 
-      // Crear enlace en la barra lateral
+      // Agregar enlace en la barra lateral
       const li = document.createElement("li");
-      li.innerHTML = `<a href="#${id}">${title}</a>`;
+      li.innerHTML = `<a href="#${id}">Sección ${num}: ${title}</a>`;
       tocEl.appendChild(li);
 
-      // Crear sección principal
+      // Agregar sección colapsable
       const sectionEl = document.createElement("section");
       sectionEl.id = id;
       sectionEl.innerHTML = `
-        <button class="collapsible">${title}</button>
-        <div>${sec.replace(titleMatch, '').replace(/\n/g, '<br>')}</div>
+        <button class="collapsible">Sección ${num}: ${title}</button>
+        <div>${body.replace(/\n/g, '<br>')}</div>
       `;
       contentEl.appendChild(sectionEl);
-    });
+    }
 
-    // Interacción con los botones colapsables
+    // Interactividad para colapsables
     document.querySelectorAll(".collapsible").forEach(btn => {
-      btn.addEventListener("click", function() {
+      btn.addEventListener("click", function () {
         const content = this.nextElementSibling;
         content.style.display = content.style.display === "block" ? "none" : "block";
       });
