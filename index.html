@@ -3,51 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Guía clínica interactiva y moderna sobre insulinoterapia. Incluye buscador, modo Alfredo, exportación a PDF, y más.">
-  <meta name="keywords" content="insulinoterapia, guía médica, diabetes, insulina, medicina, clínica">
-  <meta name="author" content="Buffalcoob480 y ChatGPT">
   <title>Guía Clínica de Insulinoterapia</title>
+  <meta name="description" content="Guía clínica interactiva, visual y didáctica sobre insulinoterapia.">
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style id="dark-mode-style"></style>
 </head>
-<body class="loaded">
-  <div id="intro-cover">
-    <div class="intro-content">
-      <h1>Bienvenido a la Guía Clínica de Insulinoterapia</h1>
-      <p>Consulta estructurada, interactiva y clara de todo el documento clínico</p>
-      <button id="enter-site">Explorar la Guía</button>
-    </div>
-  </div>
-
+<body>
   <header>
     <h1><i class="fas fa-syringe"></i> Guía Clínica de Insulinoterapia</h1>
   </header>
   <div class="container">
     <aside id="sidebar">
-      <input type="text" id="search" placeholder="Buscar sección..."/>
+      <input type="text" id="search" placeholder="Buscar sección...">
       <ul id="toc"></ul>
     </aside>
     <main id="content"></main>
   </div>
-  <div class="tools">
-    <button id="toggle-alfredo">🌙 Modo Alfredo</button>
-    <button id="print">🖨️ Exportar PDF</button>
-  </div>
-  <section id="contacto" data-aos="fade-up">
-    <h2>Contacto</h2>
-    <p>¿Tienes preguntas o sugerencias sobre esta guía? Contáctanos:</p>
-    <form onsubmit="Swal.fire('Gracias', 'Tu mensaje ha sido enviado.', 'success'); return false;">
-      <input type="text" placeholder="Tu nombre" required>
-      <input type="email" placeholder="Tu correo electrónico" required>
-      <textarea placeholder="Tu mensaje..." required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
+
+  <!-- Extras -->
+  <section id="algoritmo" data-aos="fade-up">
+    <h2>Algoritmo de Titulación de Insulina Basal</h2>
+    <svg width="100%" viewBox="0 0 600 200" style="max-width: 100%;">
+      <rect x="20" y="20" width="200" height="40" fill="#42a5f5"/>
+      <text x="30" y="45" fill="#fff">¿Glucosa en ayunas > 180?</text>
+      <line x1="120" y1="60" x2="120" y2="80" stroke="#333" />
+      <rect x="20" y="80" width="200" height="40" fill="#66bb6a"/>
+      <text x="30" y="105" fill="#fff">Ajustar dosis +4 U</text>
+    </svg>
   </section>
+
+  <section id="faq" data-aos="fade-up">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="faq">
+      <div class="faq-question">¿Cómo ajustar la dosis de insulina basal?</div>
+      <div class="faq-answer">Si glucosa en ayunas >180 mg/dL → +4 U<br>Si 140–180 → +2 U<br>Si 110–139 → sin cambio<br>Si <110 → -2 U</div>
+    </div>
+    <div class="faq">
+      <div class="faq-question">¿Qué significa TIR?</div>
+      <div class="faq-answer">TIR es el tiempo en rango de glucosa (70–180 mg/dL). Se recomienda >70% del tiempo.</div>
+    </div>
+  </section>
+
+  <section id="barras-glucosa" data-aos="fade-up">
+    <h2>Objetivos de Control Glucémico</h2>
+    <div class="barra-glucosa">
+      <div class="tbr">TBR <4%</div>
+      <div class="tir">TIR >70%</div>
+      <div class="tar">TAR <25%</div>
+    </div>
+  </section>
+
+  <p data-aos="fade-up">
+    El uso de 
+    <span class="tooltip">MCG
+      <span class="tooltiptext">Monitorización Continua de Glucosa</span>
+    </span> 
+    es crucial para pacientes con terapia intensiva.
+  </p>
+
   <footer>
-    <p>© 2025 Guía de Insulinoterapia | Página web creada con ayuda de IA</p>
+    <p>© 2025 Guía de Insulinoterapia | Página educativa e interactiva</p>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
