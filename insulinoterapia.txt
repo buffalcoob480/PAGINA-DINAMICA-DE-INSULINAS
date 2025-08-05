@@ -1,0 +1,14 @@
+Sección 1: Introducción
+La insulinoterapia es fundamental en el tratamiento de la diabetes tipo 1 y, en algunos casos, tipo 2...
+
+Sección 2: Tipos de insulina
+- Insulina rápida
+- Insulina intermedia
+- Insulina basal
+- Insulina premezclada
+
+Sección 3: Titulación de insulina basal
+- Ayunas >180 mg/dL → +4 U
+- 140–180 mg/dL → +2 U
+- 110–139 mg/dL → sin cambio
+- <110 mg/dL → -2 U
